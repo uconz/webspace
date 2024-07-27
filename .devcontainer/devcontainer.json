@@ -2,21 +2,23 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/alpine
 {
 	"name": "webtop",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	//"image": "mcr.microsoft.com/devcontainers/base:alpine-3.19"
+	"runArgs": ["--device=/dev/net/tun"],
     "service": "webtop",
     "dockerComposeFile": "docker-compose.yml",
-    "workspaceFolder": "/workspace",
-    "forwardPorts": [
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"forwardPorts": [
         3000
     ],
     "portsAttributes": {
         "3000": {
             "label": "webtop"
         }
-    }
+    },
+
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features": {
+		"ghcr.io/tailscale/codespace/tailscale": {}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -24,8 +26,15 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
 
-	// Configure tool-specific properties.
-	// "customizations": {},
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	}
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"

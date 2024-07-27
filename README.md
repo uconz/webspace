@@ -21,3 +21,14 @@ We use [Codespaces](https://github.com/features/codespaces) to get a virtual mac
 Then we use [webtop](https://docs.linuxserver.io/images/docker-webtop/) to start a docker container including a desktop environment and tools to make is accessible in the browser.
 
 Take a look at the .devcontainer folder for details and feel free to modify it to your needs.
+
+## Tailscale
+
+You can you Tailscale to connect to other devices and networks.
+
+``` shell
+tailscale up --accept-routes
+```
+
+You'll only need to run `tailscale up` once per Codespace.
+The Tailscale state will be saved between rebuilds.
