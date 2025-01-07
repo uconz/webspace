@@ -3,7 +3,7 @@
 {
 	"name": "webtop",
 	"runArgs": ["--device=/dev/net/tun"],
-    "service": "webtop",
+    "service": "ubuntu",
     "dockerComposeFile": "docker-compose.yml",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"forwardPorts": [

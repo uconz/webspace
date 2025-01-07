@@ -1,8 +1,15 @@
 ---
 services:
+  ubuntu:
+    image: mcr.microsoft.com/devcontainers/universal:linux
+    container_name: ubuntu
+    restart: unless-stopped
+    volumes:
+      - ..:/workspace:cached
+
   webtop:
-    #image: lscr.io/linuxserver/webtop:latest
-    build: .
+    image: lscr.io/linuxserver/webtop:latest
+    #build: .
     container_name: webtop
     security_opt:
       - seccomp:unconfined #optional
@@ -12,14 +19,23 @@ services:
       - TZ=Etc/UTC
       - SUBFOLDER=/ #optional
       - TITLE=Webtop #optional
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock #optional
-      - ..:/workspace:cached
     ports:
       - 3000:3000
       #- 3001:3001
-    devices:
-      - /dev/net/tun:/dev/net/tun
+    # devices:
     #  - /dev/dri:/dev/dri #optional
     shm_size: "1gb" #optional
+    restart: unless-stopped
+
+  tailscale:
+    container_name: tailscale
+    hostname: tailscale
+    image: tailscale/tailscale:stable
+    volumes:
+      - /dev/net/tun:/dev/net/tun # Required for tailscale to work
+    cap_add: # Required for tailscale to work
+      - net_admin
+      - sys_module
+    command: tailscaled
+    privileged: true
     restart: unless-stopped
