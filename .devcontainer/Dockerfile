@@ -1,5 +1,5 @@
-FROM lscr.io/linuxserver/webtop:latest
+FROM lscr.io/linuxserver/webtop:debian-xfce
 
-RUN apk update
-RUN apk add git
+RUN apt update
+RUN apt install git -y
 RUN mkdir /usr/local/sbin
