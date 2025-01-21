@@ -1,4 +1,4 @@
-FROM lscr.io/linuxserver/webtop:debian-xfce
+FROM lscr.io/linuxserver/webtop:debian-icewm
 
 RUN apt update
 RUN apt install git -y
